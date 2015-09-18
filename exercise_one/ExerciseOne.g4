@@ -1,21 +1,25 @@
 grammar ExerciseOne;
 
-/** The start rule; begin parsing here. */
-prog:   stat+ ;
+comando:   comando (ENTAO|APOS|NEWLINE) comando
+        |  LPAR comando RPAR
+        |  basico
+        |  NEWLINE
+        ;
 
-stat:   expr NEWLINE
-    |   ID '=' expr NEWLINE
-    |   NEWLINE
-    ;
+basico:    FRENTE   INT
+      |    ESQUERDA INT
+      |    DIREITA  INT
+      |    TRAS     INT
+      ;
 
-expr:   expr ('*'|'/') expr
-    |   expr ('+'|'-') expr
-    |   INT
-    |   ID
-    |   '(' expr ')'
-    ;
-
-ID  :   [a-zA-Z]+ ;      // match identifiers <label id="code.tour.expr.3"/>
-INT :   [0-9]+ ;         // match integers
-NEWLINE:'\r'? '\n' ;     // return newlines to parser (is end-statement signal)
-WS  :   [ \t]+ -> skip ; // toss out whitespace
+FRENTE    :'FRENTE' ;
+ESQUERDA  :'ESQUERDA';
+DIREITA   :'DIREITA';
+TRAS      :'TRAS';
+ENTAO     :'ENTAO';
+APOS      :'APOS';
+LPAR      :'(';
+RPAR      :')';
+INT       :[0-9]+ ;
+NEWLINE   :'\r'? '\n' ;
+WS        :[ \t]+ -> skip ;
