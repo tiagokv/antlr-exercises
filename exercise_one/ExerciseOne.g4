@@ -1,9 +1,11 @@
 grammar ExerciseOne;
 
-comando:   comando (ENTAO|APOS|NEWLINE) comando
-        |  LPAR comando RPAR
-        |  basico
-        |  NEWLINE
+init: comando;
+
+comando:   comando (ENTAO|APOS|NEWLINE) comando #dep
+        |  LPAR comando RPAR                    #pars
+        |  basico                               #bas
+        |  NEWLINE                              #newline
         ;
 
 basico:    FRENTE   INT
