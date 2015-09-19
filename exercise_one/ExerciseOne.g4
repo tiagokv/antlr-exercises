@@ -2,7 +2,7 @@ grammar ExerciseOne;
 
 init: comando;
 
-comando:   comando (ENTAO|APOS|NEWLINE) comando #dep
+comando:   comando op=(ENTAO|APOS|NEWLINE) comando #dep
         |  LPAR comando RPAR                    #pars
         |  basico                               #bas
         |  NEWLINE                              #newline
